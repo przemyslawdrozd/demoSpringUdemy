@@ -1,11 +1,14 @@
 package com.przemo.demo.student;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Student {
 
-    enum Gender {
-        MALE, FEMALE
+    public enum Gender {
+        MALE, FEMALE,
+        male, female
     }
 
     private final UUID studentId;
@@ -15,12 +18,12 @@ public class Student {
     private final Gender gender;
     private final int age;
 
-    public Student(UUID studentId,
-                   String firstName,
-                   String lastName,
-                   String email,
-                   Gender gender,
-                   int age) {
+    public Student(@JsonProperty("studentId") UUID studentId,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("lastName") String lastName,
+                   @JsonProperty("email") String email,
+                   @JsonProperty("gender") Gender gender,
+                   @JsonProperty("age") int age) {
 
         this.studentId = studentId;
         this.firstName = firstName;
@@ -52,5 +55,17 @@ public class Student {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
+                '}';
     }
 }
